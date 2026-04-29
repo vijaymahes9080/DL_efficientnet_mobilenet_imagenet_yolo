@@ -1,0 +1,7 @@
+*.keras
+*.h5
+*.tflite
+*.pt
+*.npy
+__pycache__/
+DL - imagenet/models/champion_model_mastery_optimized.keras

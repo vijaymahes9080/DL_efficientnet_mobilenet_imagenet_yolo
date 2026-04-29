@@ -1,0 +1,14 @@
+tensorflow>=2.15.0
+pandas
+numpy
+scikit-learn
+Pillow
+matplotlib
+seaborn
+tqdm
+ultralytics
+onnx
+torch
+torchvision
+mediapipe
+opencv-contrib-python

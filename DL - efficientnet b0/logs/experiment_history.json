@@ -1,0 +1,28 @@
+[
+    {
+        "cycle": 1,
+        "change": "Reduced Learning Rate (0.5x)",
+        "reason": "UNDERFITTING",
+        "result": {
+            "accuracy": 0.3176079734219269,
+            "precision_macro": 0.2824137733566329,
+            "recall_macro": 0.2888718951311807,
+            "f1_macro": 0.24287422924043647,
+            "mcc": 0.19854666151184913,
+            "kappa": 0.18984233313415322,
+            "specificity_macro": 0.884240998819812,
+            "auc_roc": 0.6830238479400184,
+            "log_loss": 1.7425430513842195,
+            "mastery_score": 39.64375608044978,
+            "train_accuracy": 0.28562501072883606,
+            "val_accuracy": 0.31760796904563904,
+            "train_loss": 1.8739842176437378,
+            "val_loss": 1.7425322532653809,
+            "val_loss_history": [
+                1.7511043548583984,
+                1.7822602987289429,
+                1.7425322532653809
+            ]
+        }
+    }
+]

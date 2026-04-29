@@ -1,0 +1,3 @@
+scenario,accuracy,performance_drop
+Standard Pipeline,0.3295755982398987,0.0
+No Augmentation,0.3295755982398987,0.0

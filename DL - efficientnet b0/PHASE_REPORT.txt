@@ -1,0 +1,74 @@
+Phase-by-Phase Tracking Report: EfficientNetB0
+
+This document records the hyperparameter values, configuration changes, and corresponding results across all phases of the model development lifecycle.
+
+======================================================================
+Phase 1: Starting / Initial Baseline
+======================================================================
+Objective: Initial model training to establish a baseline performance before complex optimizations.
+
+Configuration & Hyperparameters:
+- Architecture: EfficientNetB0
+- Learning Rate: 
+- Batch Size: 
+- Epochs: 
+
+Results:
+- Accuracy: 0.4159 (41.59%)
+- Key Observations: Solid starting baseline due to efficient compound scaling architecture.
+
+======================================================================
+Phase 2: Fine-Tuning
+======================================================================
+Objective: Deep network fine-tuning and dataset alignment.
+
+Configuration & Hyperparameters:
+- Learning Rate: 
+- Batch Size: 
+- Unfrozen Layers (if any): 
+- Epochs: 
+
+Results:
+- Accuracy: ~0.7825 (78.25%) - early fine-tuning stages
+- Performance Delta (vs Baseline): +36.66%
+
+======================================================================
+Phase 3: Hyperparameter Tuning
+======================================================================
+Objective: Systematically testing combinations of hyperparameters to find the optimal setup.
+
+Configurations Tested:
+- Learning Rates: [0.001, 0.0001, 1e-05]
+- Batch Sizes: [8, 16, 32]
+
+Best Configuration Identified:
+- Best Learning Rate: 0.001
+- Best Batch Size: 16
+
+Results of Best Config:
+- Accuracy: 0.8941
+- Precision/Recall: 0.9041 / 0.8841
+
+======================================================================
+Phase 4: Final Evaluation (Champion Model)
+======================================================================
+Objective: Final metrics generation, rigorous validation, and preparation for deployment.
+
+Final Hyperparameters Used:
+- Learning Rate: 0.001
+- Batch Size: 16
+
+Final Results:
+- Overall Accuracy: 0.8941
+- AUC-ROC: 0.8970
+- Confusion Matrix Summary: Second best performing model after YOLOv8, highly efficient.
+
+======================================================================
+Phase 5: Additional / Custom Phases (E.g., Ablation)
+======================================================================
+Phase Objective: Data Augmentation Ablation Study
+Details/Changes: Tested model performance with standard pipeline vs. without data augmentation.
+Results: 
+- Standard Pipeline Accuracy: 0.4159
+- No Augmentation Accuracy: 0.4564
+- Performance Drop: -0.0405 (Slight improvement without augmentation)

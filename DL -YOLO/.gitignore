@@ -1,0 +1,10 @@
+*.keras
+*.h5
+*.tflite
+*.pt
+*.npy
+__pycache__/
+models/champion_model_mastery.keras
+models/optimized/champion_model.tflite
+__pycache__/
+models/champion_model_mastery.keras
