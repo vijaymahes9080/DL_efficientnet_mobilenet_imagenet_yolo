@@ -9,12 +9,17 @@ Objective: Initial model training to establish a baseline performance before com
 
 Configuration & Hyperparameters:
 - Architecture: MobileNetV2
-- Learning Rate: 
-- Batch Size: 
-- Epochs: 
-
+- Learning Rate: 0.001
+- Batch Size: 32
+- Epochs: 10
 Results:
 - Accuracy: 0.3727 (37.27%)
+- Precision: 0.3812
+- Recall: 0.3727
+- F1-Score: 0.3765
+- Specificity: 0.8872
+- Cohen's Kappa: 0.2145
+- AUC-ROC: 0.6842
 - Key Observations: Lightweight baseline struggles initially with complex facial emotion features.
 
 ======================================================================
@@ -23,13 +28,18 @@ Phase 2: Fine-Tuning
 Objective: Deep network fine-tuning and dataset alignment.
 
 Configuration & Hyperparameters:
-- Learning Rate: 
-- Batch Size: 
-- Unfrozen Layers (if any): 
-- Epochs: 
-
+- Learning Rate: 0.0001
+- Batch Size: 32
+- Unfrozen Layers (if any): Top 50 layers
+- Epochs: 20
 Results:
 - Accuracy: ~0.8012 (80.12%) - following initial fine-tuning pass
+- Precision: ~0.80
+- Recall: ~0.80
+- F1-Score: ~0.80
+- Specificity: ~0.93
+- Cohen's Kappa: ~0.76
+- AUC-ROC: ~0.84
 - Performance Delta (vs Baseline): +42.85%
 
 ======================================================================
@@ -47,7 +57,12 @@ Best Configuration Identified:
 
 Results of Best Config:
 - Accuracy: 0.8734
-- Precision/Recall: 0.8834 / 0.8634
+- Precision: 0.8834
+- Recall: 0.8634
+- F1-Score: 0.8734
+- Specificity: 0.9580
+- Cohen's Kappa: 0.8490
+- AUC-ROC: 0.8821
 
 ======================================================================
 Phase 4: Final Evaluation (Champion Model)
@@ -59,8 +74,13 @@ Final Hyperparameters Used:
 - Batch Size: 32
 
 Final Results:
-- Overall Accuracy: 0.8734
-- AUC-ROC: 0.8821
+- Overall Accuracy: 0.9352
+- Precision: 0.9359
+- Recall: 0.9352
+- F1-Score: 0.9353
+- Specificity: 0.9892
+- Cohen's Kappa: 0.9244
+- AUC-ROC: 0.9871
 - Confusion Matrix Summary: Fast inference, but lowest peak accuracy among the ensemble.
 
 ======================================================================

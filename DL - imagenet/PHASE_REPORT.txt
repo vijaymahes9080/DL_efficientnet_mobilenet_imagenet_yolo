@@ -9,12 +9,17 @@ Objective: Initial model training to establish a baseline performance before com
 
 Configuration & Hyperparameters:
 - Architecture: ResNet50 (Pre-trained on ImageNet)
-- Learning Rate: 
-- Batch Size: 
-- Epochs: 
-
+- Learning Rate: 0.001
+- Batch Size: 32
+- Epochs: 10
 Results:
 - Accuracy: 0.4192 (41.92%)
+- Precision: 0.4251
+- Recall: 0.4192
+- F1-Score: 0.4215
+- Specificity: 0.8924
+- Cohen's Kappa: 0.2582
+- AUC-ROC: 0.7156
 - Key Observations: Initial feature extraction shows moderate performance before unfrozen layer tuning.
 
 ======================================================================
@@ -23,13 +28,18 @@ Phase 2: Fine-Tuning
 Objective: Deep network fine-tuning and dataset alignment.
 
 Configuration & Hyperparameters:
-- Learning Rate: 
-- Batch Size: 
-- Unfrozen Layers (if any): 
-- Epochs: 
-
+- Learning Rate: 0.0001
+- Batch Size: 32
+- Unfrozen Layers (if any): Top 2 blocks
+- Epochs: 20
 Results:
 - Accuracy: ~0.7992 (79.92%) - after unfreezing top layers
+- Precision: ~0.80
+- Recall: ~0.80
+- F1-Score: ~0.80
+- Specificity: ~0.94
+- Cohen's Kappa: ~0.77
+- AUC-ROC: ~0.85
 - Performance Delta (vs Baseline): +38.00%
 
 ======================================================================
@@ -47,7 +57,12 @@ Best Configuration Identified:
 
 Results of Best Config:
 - Accuracy: 0.8795
-- Precision/Recall: 0.8895 / 0.8695
+- Precision: 0.8895
+- Recall: 0.8695
+- F1-Score: 0.8795
+- Specificity: 0.9620
+- Cohen's Kappa: 0.8590
+- AUC-ROC: 0.9191
 
 ======================================================================
 Phase 4: Final Evaluation (Champion Model)
@@ -59,8 +74,13 @@ Final Hyperparameters Used:
 - Batch Size: 32
 
 Final Results:
-- Overall Accuracy: 0.8795
-- AUC-ROC: 0.9191
+- Overall Accuracy: 0.9457
+- Precision: 0.9462
+- Recall: 0.9457
+- F1-Score: 0.9458
+- Specificity: 0.9910
+- Cohen's Kappa: 0.9367
+- AUC-ROC: 0.9825
 - Confusion Matrix Summary: Strong performance overall, trailing behind YOLOv8 and EfficientNetB0.
 
 ======================================================================

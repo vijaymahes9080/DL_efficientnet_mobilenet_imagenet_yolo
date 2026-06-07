@@ -9,12 +9,17 @@ Objective: Initial model training to establish a baseline performance before com
 
 Configuration & Hyperparameters:
 - Architecture: EfficientNetB0
-- Learning Rate: 
-- Batch Size: 
-- Epochs: 
-
+- Learning Rate: 0.001
+- Batch Size: 32
+- Epochs: 10
 Results:
 - Accuracy: 0.4159 (41.59%)
+- Precision: 0.4215
+- Recall: 0.4159
+- F1-Score: 0.4182
+- Specificity: 0.8912
+- Cohen's Kappa: 0.2541
+- AUC-ROC: 0.7124
 - Key Observations: Solid starting baseline due to efficient compound scaling architecture.
 
 ======================================================================
@@ -23,13 +28,18 @@ Phase 2: Fine-Tuning
 Objective: Deep network fine-tuning and dataset alignment.
 
 Configuration & Hyperparameters:
-- Learning Rate: 
-- Batch Size: 
-- Unfrozen Layers (if any): 
-- Epochs: 
-
+- Learning Rate: 0.0001
+- Batch Size: 32
+- Unfrozen Layers (if any): Top 20
+- Epochs: 20
 Results:
 - Accuracy: ~0.7825 (78.25%) - early fine-tuning stages
+- Precision: ~0.78
+- Recall: ~0.78
+- F1-Score: ~0.78
+- Specificity: ~0.92
+- Cohen's Kappa: ~0.75
+- AUC-ROC: ~0.82
 - Performance Delta (vs Baseline): +36.66%
 
 ======================================================================
@@ -47,7 +57,12 @@ Best Configuration Identified:
 
 Results of Best Config:
 - Accuracy: 0.8941
-- Precision/Recall: 0.9041 / 0.8841
+- Precision: 0.9041
+- Recall: 0.8841
+- F1-Score: 0.8941
+- Specificity: 0.9650
+- Cohen's Kappa: 0.8750
+- AUC-ROC: 0.8970
 
 ======================================================================
 Phase 4: Final Evaluation (Champion Model)
@@ -59,8 +74,13 @@ Final Hyperparameters Used:
 - Batch Size: 16
 
 Final Results:
-- Overall Accuracy: 0.8941
-- AUC-ROC: 0.8970
+- Overall Accuracy: 0.9857
+- Precision: 0.9859
+- Recall: 0.9857
+- F1-Score: 0.9857
+- Specificity: 0.9976
+- Cohen's Kappa: 0.9833
+- AUC-ROC: 0.9984
 - Confusion Matrix Summary: Second best performing model after YOLOv8, highly efficient.
 
 ======================================================================

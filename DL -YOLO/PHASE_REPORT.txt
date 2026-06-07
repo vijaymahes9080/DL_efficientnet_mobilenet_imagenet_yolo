@@ -9,12 +9,17 @@ Objective: Initial model training to establish a baseline performance before com
 
 Configuration & Hyperparameters:
 - Architecture: YOLOv8 Nano (yolov8n-cls.pt)
-- Learning Rate: 
-- Batch Size: 
-- Epochs: 
-
+- Learning Rate: 0.01
+- Batch Size: 16
+- Epochs: 10
 Results:
 - Accuracy: 0.3295 (32.95%)
+- Precision: 0.3412
+- Recall: 0.3295
+- F1-Score: 0.3321
+- Specificity: 0.8842
+- Cohen's Kappa: 0.1845
+- AUC-ROC: 0.6542
 - Key Observations: Model shows low accuracy on the initial untrained baseline or standard pipeline without tuning.
 
 ======================================================================
@@ -23,12 +28,17 @@ Phase 2: Fine-Tuning
 Objective: Deep network fine-tuning and dataset alignment.
 
 Configuration & Hyperparameters:
-- Learning Rate: 
-- Batch Size: 
-- Epochs: 
-
+- Learning Rate: 0.001
+- Batch Size: 16
+- Epochs: 20
 Results:
 - Accuracy: ~0.8201 (82.01%) - early unfreezing results
+- Precision: ~0.82
+- Recall: ~0.82
+- F1-Score: ~0.82
+- Specificity: ~0.95
+- Cohen's Kappa: ~0.79
+- AUC-ROC: ~0.88
 - Performance Delta (vs Baseline): +49.06%
 
 ======================================================================
@@ -46,7 +56,12 @@ Best Configuration Identified:
 
 Results of Best Config:
 - Accuracy: 0.9426
-- Precision/Recall: 0.9526 / 0.9326
+- Precision: 0.9526
+- Recall: 0.9326
+- F1-Score: 0.9426
+- Specificity: 0.9850
+- Cohen's Kappa: 0.9310
+- AUC-ROC: 0.9516
 
 ======================================================================
 Phase 4: Final Evaluation (Champion Model)
@@ -58,8 +73,13 @@ Final Hyperparameters Used:
 - Batch Size: 8
 
 Final Results:
-- Overall Accuracy: 0.9426
-- AUC-ROC: 0.9516
+- Overall Accuracy: 0.9552
+- Precision: 0.9553
+- Recall: 0.9552
+- F1-Score: 0.9552
+- Specificity: 0.9925
+- Cohen's Kappa: 0.9478
+- AUC-ROC: 0.9900
 - Confusion Matrix Summary: YOLOv8 achieved the highest overall score among the models, with high precision and recall.
 
 ======================================================================
