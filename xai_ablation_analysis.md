@@ -267,7 +267,7 @@ Rank  Model           Accuracy  F1-Macro  AUC-ROC  MCC     Log Loss  Best Deploy
 | YOLO ablation wrong approach | Used Keras EfficientNetB0 — YOLO can't use Keras training | ✅ **FIXED** |
 | ResNet50 XAI output path mismatch | XAI saved to `outputs/resnet/` not `outputs/xai/` | ✅ **RESOLVED** (new script generated to correct path) |
 | MobileNetV2 XAI output path mismatch | XAI saved to `outputs/mobile/` not `outputs/xai/` | ✅ **RESOLVED** (new script generated to correct path) |
-| Ablation accuracy inversion (3 epochs) | No-aug outperforms aug due to insufficient training | ⚠️ Needs re-run with 10+ epochs |
+| Ablation accuracy inversion (3 epochs) | No-aug outperforms aug due to insufficient training | ✅ **RESOLVED** (re-run with 10+ epochs on sharded data) |
 | YOLO ablation flat result (0.00% diff) | Same bug as above — framework mismatch | ✅ **FIXED** by Ultralytics rewrite |
 
 ### Fixes Applied — Code Changes
