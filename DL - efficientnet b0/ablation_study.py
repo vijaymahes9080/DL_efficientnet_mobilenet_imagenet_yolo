@@ -36,6 +36,9 @@ def run_ablation_scenario(name, disable_aug=False):
     class_names = train_ds.class_names
     num_classes = len(class_names)
     
+    train_ds = train_ds.shard(5, 0)
+    val_ds = val_ds.shard(5, 0)
+    
     # Preprocessing
     if not disable_aug:
         aug = tf.keras.Sequential([
@@ -43,6 +46,9 @@ def run_ablation_scenario(name, disable_aug=False):
             layers.RandomRotation(0.2),
         ])
         train_ds = train_ds.map(lambda x, y: (aug(x, training=True), y))
+    
+    train_ds = train_ds.prefetch(buffer_size=tf.data.AUTOTUNE)
+    val_ds = val_ds.prefetch(buffer_size=tf.data.AUTOTUNE)
     
     # Model
     base = applications.EfficientNetB0(include_top=False, weights='imagenet', input_shape=(224, 224, 3))
@@ -56,7 +62,7 @@ def run_ablation_scenario(name, disable_aug=False):
     model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
     
     # Fast training for ablation proof
-    history = model.fit(train_ds, epochs=3, validation_data=val_ds, verbose=1)
+    history = model.fit(train_ds, epochs=12, validation_data=val_ds, verbose=1)
     
     val_acc = history.history['val_accuracy'][-1]
     logger.info(f"Scenario {name} completed with Val Accuracy: {val_acc:.4f}")

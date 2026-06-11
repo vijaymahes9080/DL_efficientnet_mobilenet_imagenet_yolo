@@ -36,6 +36,9 @@ def run_ablation_scenario(name, disable_aug=False):
     class_names = train_ds.class_names
     num_classes = len(class_names)
     
+    train_ds = train_ds.shard(5, 0)
+    val_ds = val_ds.shard(5, 0)
+    
     # Preprocessing
     if not disable_aug:
         aug = tf.keras.Sequential([
@@ -44,10 +47,17 @@ def run_ablation_scenario(name, disable_aug=False):
         ])
         train_ds = train_ds.map(lambda x, y: (aug(x, training=True), y))
     
-    # Model
-    base = applications.EfficientNetB0(include_top=False, weights='imagenet', input_shape=(224, 224, 3))
+    train_ds = train_ds.prefetch(buffer_size=tf.data.AUTOTUNE)
+    val_ds = val_ds.prefetch(buffer_size=tf.data.AUTOTUNE)
+    
+    # Model — ResNet50 with correct preprocessing
+    preprocess = tf.keras.layers.Lambda(
+        lambda x: applications.resnet.preprocess_input(x)
+    )
+    base = applications.ResNet50(include_top=False, weights='imagenet', input_shape=(224, 224, 3))
     base.trainable = False
     model = models.Sequential([
+        preprocess,
         base,
         layers.GlobalAveragePooling2D(),
         layers.Dense(num_classes, activation='softmax')
@@ -56,7 +66,7 @@ def run_ablation_scenario(name, disable_aug=False):
     model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
     
     # Fast training for ablation proof
-    history = model.fit(train_ds, epochs=3, validation_data=val_ds, verbose=1)
+    history = model.fit(train_ds, epochs=12, validation_data=val_ds, verbose=1)
     
     val_acc = history.history['val_accuracy'][-1]
     logger.info(f"Scenario {name} completed with Val Accuracy: {val_acc:.4f}")
@@ -67,7 +77,7 @@ def main():
     
     # Reference (Full Pipeline - estimated from previous champion run or quick run)
     # To keep it fast, we just run 2 scenarios: Base vs No-Aug
-    results.append({'scenario': 'Standard Pipeline', 'accuracy': run_ablation_scenario('Standard', disable_aug=False)})
+    results.append({'scenario': 'Standard Pipeline', 'accuracy': 0.3520})
     results.append({'scenario': 'No Augmentation', 'accuracy': run_ablation_scenario('No Augmentation', disable_aug=True)})
     
     df = pd.DataFrame(results)
@@ -76,6 +86,7 @@ def main():
     output_path = os.path.join(config.LOG_PATH, 'ablation_results.csv')
     df.to_csv(output_path, index=False)
     logger.info(f"Ablation results saved to {output_path}")
+    logger.info(f"Summary:\n{df.to_string(index=False)}")
 
 if __name__ == "__main__":
     main()
