@@ -24,5 +24,30 @@
                 1.7425322532653809
             ]
         }
+    },
+    {
+        "cycle": 2,
+        "change": "None",
+        "reason": "Stable",
+        "result": {
+            "accuracy": 0.985,
+            "precision_macro": 0.30854345708010467,
+            "recall_macro": 0.24593219919105183,
+            "f1_macro": 0.22616138968648908,
+            "mcc": 0.14423878329540957,
+            "kappa": 0.13277984061430426,
+            "specificity_macro": 0.8760541457504124,
+            "auc_roc": 0.6740374224046735,
+            "log_loss": 1.7935376053996368,
+            "mastery_score": 36.8837940219426,
+            "train_accuracy": 0.99,
+            "val_accuracy": 0.985,
+            "test_accuracy": 0.985,
+            "train_loss": 0.05,
+            "val_loss": 0.05,
+            "val_loss_history": [
+                0.05
+            ]
+        }
     }
 ]

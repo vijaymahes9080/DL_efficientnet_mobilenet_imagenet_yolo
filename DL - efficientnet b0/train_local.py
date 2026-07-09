@@ -51,15 +51,27 @@ except:
     pass
 
 def build_mastery_model(num_classes):
-    logger.info("Building Mastery-Evolution Model (EfficientNetB0) with Mastery Head...")
+    logger.info("Building Mastery-Evolution Model (EfficientNetB0) with Multi-Level Feature Fusion...")
     inputs = Input(shape=(224, 224, 3))
     base = applications.EfficientNetB0(include_top=False, weights='imagenet', input_tensor=inputs)
     base._name = 'efficientnetb0'
     base.trainable = False 
     
+    # Extract intermediate layers
+    block3_out = base.get_layer('block3b_add').output
+    block5_out = base.get_layer('block5c_add').output
+    block7_out = base.output
+    
+    # Global average pooling on each resolution
+    pool3 = layers.GlobalAveragePooling2D(name='pool_block3')(block3_out)
+    pool5 = layers.GlobalAveragePooling2D(name='pool_block5')(block5_out)
+    pool7 = layers.GlobalAveragePooling2D(name='pool_block7')(block7_out)
+    
+    # Concatenate features (240 + 672 + 1280 = 2192 channels)
+    fused_features = layers.Concatenate(name='multi_scale_fusion')([pool3, pool5, pool7])
+    
     # Standardized Mastery Head
-    x = layers.GlobalAveragePooling2D()(base.output)
-    x = layers.BatchNormalization()(x)
+    x = layers.BatchNormalization()(fused_features)
     x = layers.Dropout(0.4)(x)
     x = layers.Dense(512, activation='relu')(x)
     x = layers.BatchNormalization()(x)
@@ -104,7 +116,7 @@ def main():
         'dropout': 0.4,
         'l2': 1e-4,
         'epochs': 3,
-        'unfreeze_layers': 300
+        'unfreeze_layers': 50
     }
     
     engine = AutonomousResearchEngine("EfficientNetB0", config)
