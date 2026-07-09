@@ -12,7 +12,7 @@ graph TD
     A[Data Collection & Cleaning] --> B[Dataset Splitting: 80% Train, 20% Val]
     B --> C[Preprocessing: CLAHE + Grayscale to 3-Channel RGB]
     C --> D[Data Augmentation: Flips, Rotation, Contrast]
-    D --> E[EfficientNet-B0 Feature Extraction]
+    D --> E[Multi-Level Feature Fusion: Block 3, 5 & 7]
     E --> F[Standardized Mastery Head Dense Layers]
     F --> G[Dual-Phase Training: Head Coarse Tuning ➔ Full Fine-Tuning]
     G --> H[Quantized TFLite Edge Compilation]
@@ -53,18 +53,25 @@ To maximize training stability and model generalization, input images undergo a 
 ## 🏗️ 3. Model Architecture & Layer Specifications
 **Related Script:** [train_local.py](file:///d:/DL%204%20models/DL%20-%20efficientnet%20b0/train_local.py)
 
-The backbone is an **EfficientNet-B0** convolutional neural network, which utilizes compound scaling (depth, width, and resolution) to optimize efficiency.
+The backbone is an **EfficientNet-B0** convolutional neural network. Rather than extracting features solely from the final layer, we implement a **Multi-Level Feature Fusion** approach that extracts representations at three different depths to retain fine-grained facial landmarks alongside abstract expression shapes.
+
+### Multi-Level Feature Fusion Layers
+- **Block 3 (`block3b_add`)**: Lower-level textures & edges (e.g. minor wrinkles, facial landmarks).
+- **Block 5 (`block5c_add`)**: Mid-level geometry (e.g. eye width, mouth curvature).
+- **Block 7 (`base.output`)**: High-level abstract semantic expression concepts.
+
+Each of these three intermediate maps is pooled using `GlobalAveragePooling2D` and then concatenated together to form a **2192-dimensional** fused feature vector ($240 + 672 + 1280$).
 
 ### Mastery Head Configuration
-A custom high-capacity classification head is stacked on top of the feature extractor:
+A custom high-capacity classification head is stacked on top of the fused multi-scale feature vector:
 
 | Layer Type | Parameters / Hyperparameters | Rationale |
 | :--- | :--- | :--- |
 | **Input Shape** | `(224, 224, 3)` | Matches ImageNet-trained backbone resolution. |
 | **Feature Extractor** | `applications.EfficientNetB0` | High-fidelity feature maps via Swish activation. |
-| **Global Pool** | `GlobalAveragePooling2D` | Flattens spatial dimensions into a feature vector. |
+| **Feature Fusion** | `Concatenate(pool_block3, pool_block5, pool_block7)` | Combines multi-depth spatial details for micro-expressions (2192 channels). |
 | **Normalization** | `BatchNormalization` | Stabilizes features before passing to dense layers. |
-| **Dropout 1** | `rate=0.4` | Introduces high regularization on frozen backbone. |
+| **Dropout 1** | `rate=0.4` | Introduces high regularization on fused feature vectors. |
 | **Dense Bottleneck** | `512` units, activation `'relu'` | Expands representation capacity for affective vectors. |
 | **Normalization** | `BatchNormalization` | Normalizes bottleneck activations. |
 | **Dropout 2** | `rate=0.2` | Secondary regularizer to prevent overfitting. |
