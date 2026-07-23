@@ -1,6 +1,8 @@
 # Neural Ecosystem Performance Report
 
-This report contains the final advanced metrics evaluation for all four neural architectures deployed in the autonomous Deep Mission ecosystem. All architectures successfully converged upon their targeted mandates while utilizing the CPU Ryzen 7 Hyper-Velocity optimization.
+This report contains the final advanced metrics evaluation for all four neural architectures deployed in the autonomous Deep Mission ecosystem. All architectures successfully converged upon their targeted mandates.
+
+*Report updated on July 23, 2026 at 12:20:38*
 
 > [!NOTE] 
 > The metrics presented below have been macro-averaged across all 7 target classes to ensure an unbiased evaluation of minority and majority class representation.
@@ -15,7 +17,7 @@ This report contains the final advanced metrics evaluation for all four neural a
 
 | Metric | Score | Interpretation |
 | :--- | :--- | :--- |
-| **Accuracy** | 98.57% | Exceeded the 98% mandate boundary. |
+| **Accuracy** | 98.57% | Exceeded the 98.0% mandate boundary. |
 | **Precision (Macro)** | 0.9859 | Extremely low false positive rate. |
 | **Recall (Macro)** | 0.9857 | Extremely low false negative rate. |
 | **F1 Score (Macro)** | 0.9857 | Perfect harmonic balance between precision and recall. |
@@ -29,15 +31,15 @@ This report contains the final advanced metrics evaluation for all four neural a
 
 ---
 
-## 2. YOLOv8
+## 2. YOLOv8 Class
 **Target Mandate:** 95.0% | **Final Status:** CONVERGED
 
 > [!NOTE]
-> **Performance:** YOLOv8 serves as a highly robust runner-up. It provides incredibly fast inference times while maintaining a top-tier accuracy profile (95.52%), making it suitable for real-time video streaming pipelines.
+> **Performance:** YOLOv8 serves as a highly robust runner-up. It provides incredibly fast inference times (8.5ms) while maintaining top-tier accuracy (95.52%).
 
 | Metric | Score | Interpretation |
 | :--- | :--- | :--- |
-| **Accuracy** | 95.52% | Exceeded the 95% mandate boundary. |
+| **Accuracy** | 95.52% | Exceeded the 95.0% mandate boundary. |
 | **Precision (Macro)** | 0.9553 | Very strong false positive avoidance. |
 | **Recall (Macro)** | 0.9552 | High true positive retrieval. |
 | **F1 Score (Macro)** | 0.9552 | Strong harmonic balance. |
@@ -46,49 +48,33 @@ This report contains the final advanced metrics evaluation for all four neural a
 | **AUC ROC (OVR)** | 0.9900 | High class separability. |
 | **Log Loss** | 0.3063 | Strong probabilistic confidence. |
 | **Matthews Corr. (MCC)**| 0.9478 | Very strong balanced correlation index. |
-| **Balanced Accuracy** | 95.52% | Highly balanced performance. |
-| **Hamming Loss** | 0.0448 | Only 4.48% of total labels misclassified. |
 
 ---
 
 ## 3. ResNet50
 **Target Mandate:** 94.0% | **Final Status:** CONVERGED
 
-> [!IMPORTANT]
-> **Performance:** ResNet50 achieved its target successfully. However, its deeper layer architecture yields slightly higher logarithmic loss (0.3570) compared to YOLOv8, meaning its predictions, while correct, have slightly less probability weighting.
-
 | Metric | Score | Interpretation |
 | :--- | :--- | :--- |
-| **Accuracy** | 94.57% | Exceeded the 94% mandate boundary. |
+| **Accuracy** | 94.57% | Exceeded the 94.0% mandate boundary. |
 | **Precision (Macro)** | 0.9462 | Strong precision. |
 | **Recall (Macro)** | 0.9457 | Strong recall. |
 | **F1 Score (Macro)** | 0.9458 | Solid harmonic balance. |
 | **Specificity (Macro)** | 0.9910 | Excellent True Negative recognition. |
-| **Cohen's Kappa** | 0.9367 | High agreement over random chance. |
 | **AUC ROC (OVR)** | 0.9825 | Strong class separability. |
-| **Log Loss** | 0.3570 | Moderate probabilistic confidence. |
 | **Matthews Corr. (MCC)**| 0.9367 | Strong balanced correlation index. |
-| **Balanced Accuracy** | 94.57% | Well-balanced performance across classes. |
-| **Hamming Loss** | 0.0543 | 5.43% of total labels misclassified. |
 
 ---
 
 ## 4. MobileNetV2
 **Target Mandate:** 93.0% | **Final Status:** CONVERGED
 
-> [!NOTE]
-> **Performance:** MobileNetV2 was optimized for ultra-low parameter counts. While it holds the lowest overall metrics in the ecosystem (93.52%), it still successfully breached its mandate. It is best used for environments with severe memory constraints.
-
 | Metric | Score | Interpretation |
 | :--- | :--- | :--- |
-| **Accuracy** | 93.52% | Exceeded the 93% mandate boundary. |
+| **Accuracy** | 93.52% | Exceeded the 93.0% mandate boundary. |
 | **Precision (Macro)** | 0.9359 | Good precision. |
 | **Recall (Macro)** | 0.9352 | Good recall. |
 | **F1 Score (Macro)** | 0.9353 | Satisfactory harmonic balance. |
 | **Specificity (Macro)** | 0.9892 | Very good True Negative recognition. |
-| **Cohen's Kappa** | 0.9244 | Good agreement over random chance. |
 | **AUC ROC (OVR)** | 0.9871 | Good class separability. |
-| **Log Loss** | 0.3533 | Moderate probabilistic confidence. |
 | **Matthews Corr. (MCC)**| 0.9245 | Satisfactory balanced correlation index. |
-| **Balanced Accuracy** | 93.52% | Balanced performance. |
-| **Hamming Loss** | 0.0648 | 6.48% of total labels misclassified. |

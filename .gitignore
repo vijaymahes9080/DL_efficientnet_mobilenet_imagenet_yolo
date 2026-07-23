@@ -4,4 +4,8 @@
 *.pt
 *.npy
 __pycache__/
+node_modules/
+dist/
+dataset_split/
+dataset/
 DL - imagenet/models/champion_model_mastery_optimized.keras

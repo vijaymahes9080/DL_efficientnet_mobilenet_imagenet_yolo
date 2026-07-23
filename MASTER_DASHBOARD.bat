@@ -24,10 +24,14 @@ echo                                  63. EfficientNet-B0
 echo                                  64. YOLOv8
 echo --------------------------------------------------
 echo  [7] FINAL REPORT (Mastery)       [8] AUTO-EVOLUTION (Loop)
+echo  [9] LAUNCH WEB APPLICATION (Frontend & Delivery)
 echo --------------------------------------------------
 echo  T. TEST ALL MODELS               E. EXIT MISSION
 echo ==================================================
 set /p choice="Selection ID: "
+
+:: --- Web Application Dashboard ---
+if "%choice%"=="9" (cd frontend & start "" run_frontend.bat & cd .. & goto main_menu)
 
 :: --- Evolution Loop ---
 if "%choice%"=="8" (python models\MASTER_EVOLUTION.py & pause & goto main_menu)
